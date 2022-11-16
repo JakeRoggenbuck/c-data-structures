@@ -54,4 +54,6 @@ int main() {
         printf("Element: %d\n", i);
     }
 
+    queue_destroy(&q);
+
 }
