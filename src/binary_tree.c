@@ -7,34 +7,54 @@ struct Node {
     struct Node *right;
 };
 
-struct Node build_node(int val) {
-    struct Node n;
-    n.val = val;
-    n.right = NULL;
-    n.left = NULL;
+struct Node *build_node(int val) {
+    struct Node *n = malloc(sizeof(struct Node));
+    n->val = val;
+    n->right = NULL;
+    n->left = NULL;
     return n;
 }
 
 void display(struct Node *base) {
     printf("%d ", base->val);
 
+    if (base->left != NULL) {
+        display(base->left);
+    }
+
     if (base->right != NULL) {
         display(base->right);
     }
+}
 
-    if (base->left != NULL) {
-        display(base->left);
+void insert(struct Node *base, int val) {
+    if (val < base->val) {
+        if (base->left == NULL) {
+            base->left = build_node(val);
+        } else {
+            insert(base->left, val);
+        }
+    }
+
+    if (val > base->val) {
+        if (base->right == NULL) {
+            base->right = build_node(val);
+        } else {
+            insert(base->right, val);
+        }
     }
 }
 
 int main() {
-    struct Node base = build_node(1);
+    struct Node *base = build_node(8);
 
-    struct Node r = build_node(2);
-    struct Node l = build_node(3);
+    struct Node *l = build_node(4);
+    struct Node *r = build_node(12);
 
-    base.left = &l;
-    base.right = &r;
+    base->left = l;
+    base->right = r;
 
-    display(&base);
+    insert(base, 16);
+
+    display(base);
 }
