@@ -57,6 +57,22 @@ void insert(struct Node *base, int val) {
     }
 }
 
+int contains(struct Node *base, int val) {
+    if (base == NULL) {
+        return 0;
+    }
+
+    if (base->val < val) {
+        return contains(base->right, val);
+    } else if (base->val > val) {
+        return contains(base->left, val);
+    } else if (base->val == val) {
+        return 1;
+    }
+
+    return 0;
+}
+
 int main() {
     struct Node *base = build_node(8);
 
@@ -71,4 +87,10 @@ int main() {
     insert(base, 2);
 
     display(base, 0, 0);
+
+    for (int i = 0; i < 20; ++i) {
+        if (contains(base, i)) {
+            printf("%d is in the binary tree.\n");
+        }
+    }
 }
