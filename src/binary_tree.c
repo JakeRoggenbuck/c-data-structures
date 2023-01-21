@@ -15,16 +15,23 @@ struct Node *build_node(int val) {
     return n;
 }
 
-void display(struct Node *base) {
-    printf("%d ", base->val);
-
-    if (base->left != NULL) {
-        display(base->left);
+void display(struct Node *base, int level, int is_left) {
+    if (base == NULL) {
+        return;
     }
 
-    if (base->right != NULL) {
-        display(base->right);
+    for (int i = 0; i < level; i++) {
+        if (i == level - 1) {
+            printf(is_left ? "L: " : "R: ");
+        } else {
+            printf("  ");
+        }
     }
+
+    printf("%d\n", base->val);
+
+    display(base->left, level + 1, 1);
+    display(base->right, level + 1, 0);
 }
 
 void insert(struct Node *base, int val) {
@@ -55,6 +62,8 @@ int main() {
     base->right = r;
 
     insert(base, 16);
+    insert(base, 6);
+    insert(base, 2);
 
-    display(base);
+    display(base, 0, 0);
 }
