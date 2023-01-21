@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/* Copyright (c) 2023 Jake Roggenbuck
+ *
+ * Binary tree implementation
+ */
+
 struct Node {
     int val;
     struct Node *left;
