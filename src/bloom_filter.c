@@ -27,7 +27,7 @@ void resize(struct BloomFilter *b, size_t new_size) {
     b->size = new_size;
     b->boolarr = realloc(b->boolarr, new_size * sizeof(bool));
 
-    for (int i = old_size; i < b->size; ++i) {
+    for (size_t i = old_size; i < b->size; ++i) {
         b->boolarr[i] = 0;
     }
 }
@@ -93,14 +93,14 @@ int hash_3(char *word) {
 
 void debug_bloom_filter(struct BloomFilter *b) {
     printf("[ ");
-    for (int i = 0; i < MIN(10, b->size); ++i) {
+    for (int i = 0; i < MIN(10, (int)b->size); ++i) {
         printf("%d ", b->boolarr[i] ? 1 : 0);
     }
 
     if (b->size > 10) {
         printf(" ... ");
 
-        for (int i = b->size - 10; i < b->size; ++i) {
+        for (int i = b->size - 10; i < (int)b->size; ++i) {
             printf(" %d", b->boolarr[i] ? 1 : 0);
         }
     }

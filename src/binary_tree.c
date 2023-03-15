@@ -92,7 +92,7 @@ int main() {
 
     for (int i = 0; i < 20; ++i) {
         if (contains(base, i)) {
-            printf("%d is in the binary tree.\n");
+            printf("%d is in the binary tree.\n", i);
         }
     }
 
