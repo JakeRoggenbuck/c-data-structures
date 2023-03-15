@@ -16,6 +16,7 @@ struct Pair {
 
 struct Hashmap {
     struct Pair **buckets;
+    size_t size;
 };
 
 struct Value *build_value(char *data) {
@@ -33,10 +34,11 @@ struct Pair *build_pair(char *key, struct Value *v) {
     return p;
 }
 
-struct Hashmap *build_hashmap(int size) {
+struct Hashmap *build_hashmap(size_t size) {
     struct Hashmap *h = malloc(sizeof(struct Hashmap));
+    h->size = size;
     h->buckets = malloc(size * sizeof(struct Pair));
-    for (int i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
         h->buckets[i] = NULL;
     }
     return h;
@@ -66,7 +68,7 @@ unsigned int fnv1a(char *string) {
 }
 
 int main() {
-	printf("NOTE: there may be collisions.\n");
+    printf("NOTE: there may be collisions.\n");
     struct Hashmap *h = build_hashmap(COUNT);
 
     struct Value *v = build_value("myvalue");
@@ -78,5 +80,8 @@ int main() {
     } else {
         printf("No value found.\n");
     }
+
+    free(h);
+    free(v);
     return 0;
 }
