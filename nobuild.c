@@ -1,7 +1,7 @@
 #define NOBUILD_IMPLEMENTATION
 #include "./nobuild.h"
 
-#define CFLAGS "-Wall", "-Wextra", "-g"
+#define CFLAGS "-Wall", "-Wextra", "-pedantic", "-g"
 
 void build_src(const char *file) {
     INFO("Building %s...", file);
